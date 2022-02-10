@@ -1,6 +1,8 @@
 html,
 body {
   margin: 0;
+  color: white;
+  background-color: #000D37;
 }
 
 html {
@@ -22,4 +24,33 @@ html {
   margin: 0;
   font-family: BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.button {
+  background-color: #439CF4; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: #000D37;
+  max-width: 700px;
+  margin: auto;
+  padding: 1em;
+}
+
+.content > * {
+  flex: 1 0 100%;
 }

@@ -1,4 +1,6 @@
+import { Button, ChakraProvider, Flex, Heading } from '@chakra-ui/react';
 import { getChainOptions, WalletProvider } from '@terra-money/wallet-provider';
+import { Connect } from 'components/Connect';
 import { ConnectSample } from 'components/ConnectSample';
 import { CW20TokensSample } from 'components/CW20TokensSample';
 import { NetworkSample } from 'components/NetworkSample';
@@ -13,8 +15,17 @@ import './style.css';
 function App() {
   return (
     <main
-      style={{ margin: 20, display: 'flex', flexDirection: 'column', gap: 40 }}
+      // style={{ margin: 20, display: 'flex', flexDirection: 'column', gap: 40 }}
     >
+      <Flex height="100vh" alignItems="center" justifyContent="center">
+        <Flex direction="column" background="gray.100" p={12} rounded={6} width="100%" maxWidth={700}>
+          <Heading>Send Tokens</Heading>
+          <Connect />
+        </Flex>
+      </Flex>
+      <div className="content">
+        <Connect />
+      </div>
       <ConnectSample />
       <QuerySample />
       <TxSample />
@@ -29,7 +40,9 @@ function App() {
 getChainOptions().then((chainOptions) => {
   ReactDOM.render(
     <WalletProvider {...chainOptions}>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </WalletProvider>,
     document.getElementById('root'),
   );
