@@ -24,6 +24,8 @@ export function TokenDescription(props : TokenDescriptionProps) {
   const [txResult, setTxResult] = useState<TxResult | null>(null);
   const [txError, setTxError] = useState<string | null>(null);
 
+  let amount = parseFloat(props.coin.amount) / 1000000
+  amount = Math.round(amount * 100) / 100
 
   return (
     <div>
@@ -31,7 +33,7 @@ export function TokenDescription(props : TokenDescriptionProps) {
         <Text flex={1}>{props.coin.denom}</Text>
         <Link onClick={() => {props.onOpen()}} >Send</Link>
       </Flex>
-      <Text opacity={.6}>{props.coin.amount}</Text>
+      <Text opacity={.6}>{amount}</Text>
     </div>
   );
 }
