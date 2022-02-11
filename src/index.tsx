@@ -1,6 +1,6 @@
 import { Box, Button, ChakraProvider, Flex, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import { Int, Numeric } from '@terra-money/terra.js';
-import { getChainOptions, useConnectedWallet, useLCDClient, WalletProvider } from '@terra-money/wallet-provider';
+import { Fee, Int, MsgSend, Numeric } from '@terra-money/terra.js';
+import { getChainOptions, TxResult, useConnectedWallet, useLCDClient, WalletProvider } from '@terra-money/wallet-provider';
 import { Connect } from 'components/Connect';
 import { ConnectSample } from 'components/ConnectSample';
 import { CW20TokensSample } from 'components/CW20TokensSample';
@@ -62,7 +62,9 @@ function App() {
     <main
       // style={{ margin: 20, display: 'flex', flexDirection: 'column', gap: 40 }}
     >
-      <SendTokensModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} coin={coin}/>      
+      {connectedWallet && coin && 
+        <SendTokensModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} coin={coin} connectedWallet={connectedWallet}/>
+      }
       <Flex height="100vh" alignItems="center" justifyContent="center">
         <Flex direction="column" background="#000D37" color={"white"} p={12} rounded={6} width="100%" maxWidth={700} gap={3}>
           <Heading>Send Tokens</Heading>
