@@ -17,6 +17,7 @@ const TEST_TO_ADDRESS = 'terra12hnhh5vtyg5juqnzm43970nh4fw42pt27nw9g9';
 
 interface TokenDescriptionProps {
   coin: Coin
+  onOpen: Function
 }
 
 export function TokenDescription(props : TokenDescriptionProps) {
@@ -28,7 +29,7 @@ export function TokenDescription(props : TokenDescriptionProps) {
     <div>
       <Flex direction={"row"}>
         <Text flex={1}>{props.coin.denom}</Text>
-        <Link>Send</Link>
+        <Link onClick={() => {props.onOpen()}} >Send</Link>
       </Flex>
       <Text opacity={.6}>{props.coin.amount}</Text>
     </div>
