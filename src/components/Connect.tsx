@@ -20,11 +20,11 @@ export function Connect() {
     <div>
       
       {status === WalletStatus.WALLET_NOT_CONNECTED && (
-        <Button isFullWidth={true} colorScheme="teal" onClick={() => {connect(ConnectType.EXTENSION)}}>Connect Wallet</Button>
+        <Button isFullWidth={true} backgroundColor="#5543F2" colorScheme="blue" onClick={() => {connect(ConnectType.EXTENSION)}}>Connect Wallet</Button>
       )}
 
       {status === WalletStatus.WALLET_CONNECTED && (
-        <Button isFullWidth={true} colorScheme="teal" className="button" title="disconnect" onClick={() => {disconnect()}}>{wallets[0].terraAddress}</Button>
+        <Button isFullWidth={true} backgroundColor="#5543F2" colorScheme="blue" className="button" title="disconnect" onClick={() => {disconnect()}}>{wallets[0].terraAddress}</Button>
       )}
     </div>
   );
