@@ -31,7 +31,7 @@ export function TokenDescription(props : TokenDescriptionProps) {
     <div>
       <Flex direction={"row"}>
         <Text flex={1}>{props.coin.denom}</Text>
-        <Link onClick={() => {props.onOpen()}} >Send</Link>
+        <Link onClick={() => {props.onOpen()}} >&#x21AA;Send</Link>
       </Flex>
       <Text opacity={.6}>{amount}</Text>
     </div>
