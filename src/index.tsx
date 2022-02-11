@@ -1,4 +1,4 @@
-import { Box, Button, ChakraProvider, Flex, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, Flex, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner, Text, useDisclosure } from '@chakra-ui/react';
 import { Fee, Int, MsgSend, Numeric } from '@terra-money/terra.js';
 import { getChainOptions, TxResult, useConnectedWallet, useLCDClient, WalletProvider } from '@terra-money/wallet-provider';
 import { Connect } from 'components/Connect';
@@ -59,36 +59,37 @@ function App() {
   }
 
   return (
-    <main
-      // style={{ margin: 20, display: 'flex', flexDirection: 'column', gap: 40 }}
-    >
+    <main>
       {connectedWallet && coin && 
         <SendTokensModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} coin={coin} connectedWallet={connectedWallet}/>
       }
-      <Flex height="100vh" alignItems="center" justifyContent="center">
-        <Flex direction="column" background="#000D37" color={"white"} p={12} rounded={6} width="100%" maxWidth={700} gap={3}>
+      <Flex height="100vh" alignItems="center" justifyContent="center" backgroundColor={"gray.200"} >
+        <Flex direction="column" background="#000D37" color={"white"} p={12} rounded={20} width="100%" maxWidth={700} gap={3} boxShadow="dark-lg">
           <Heading>Send Tokens</Heading>
           <Connect />
-          {/* {bank && <pre>{bank}</pre>} */}
           <Flex flexDir={"column"} backgroundColor="#0D1840" borderWidth={"3px"} borderColor="#253054" p={6} rounded={6} gap={5}>
-            {
+            
+            { // List all tokens
+              bank.length != 0 &&
               bank.map((coin) => (
                 <TokenDescription key={coin.denom} coin={coin} onOpen={() => {openModal(coin)}} />
               ))
             }
+
+            { // Loading Indicator
+              bank.length == 0 && connectedWallet && 
+              <Flex direction={"row"} alignItems={"center"} justifyContent={"center"} textAlign={"center"}>
+                <Spinner mr={3}/>Fetching Your Tokens
+              </Flex>
+            }
+
+            { // Connect Wallet Message
+              !connectedWallet && 
+              <Text align={"center"} opacity={.6}>Please connect wallet to continue</Text>
+            }
           </Flex>
           </Flex>
       </Flex>
-      <div className="content">
-        <Connect />
-      </div>
-      <ConnectSample />
-      <QuerySample />
-      <TxSample />
-      <SignSample />
-      <SignBytesSample />
-      <CW20TokensSample />
-      <NetworkSample />
     </main>
   );
 }
