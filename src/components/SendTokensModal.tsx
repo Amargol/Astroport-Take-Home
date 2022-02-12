@@ -28,6 +28,7 @@ export function SendTokensModal(props : SendTokensModalProps) {
   const { isOpen, onOpen, onClose, connectedWallet } = props
   const [ recipient, setRecipient ] = useState<string>("");
   const [ amount, setAmount ] = useState<string>("");
+
   const [txResult, setTxResult] = useState<TxResult | null>(null);
   const [txError, setTxError] = useState<string | null>(null);
 
@@ -87,56 +88,63 @@ export function SendTokensModal(props : SendTokensModalProps) {
   
   return (
     <Box>
-      {props.coin && (
-        <Modal isOpen={isOpen} onClose={onCloseModal}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Send {props.coin.denom}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {!txResult && !txError && (
-                <Box display={"flex"} flexDir={"column"} gap={5}>
-                  <FormControl>
-                    <FormLabel>Recipient</FormLabel>
-                    <Input
-                      placeholder='terra12y5m2n9f7e2nmwz5fxtfvujv2ru23trr6pnk6f'
-                      type="text" value={recipient}
-                      onChange={(e) => {setRecipient(e.target.value)}}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Amount</FormLabel>
-                    <Input
-                      placeholder='100'
-                      type="number" value={amount}
-                      onChange={(e) => {setAmount(e.target.value)}}
-                    />
-                  </FormControl>
-                </Box>
-              )}
-              {txResult && (
-                <Box display={"flex"} flexDir={"column"} gap={5}>
-                  <Heading>Success</Heading>
-                  <Link
-                    href={`https://finder.terra.money/${connectedWallet.network.chainID}/tx/${txResult.result.txhash}`}
-                    target="_blank"
-                  >                
-                    <Button colorScheme={"green"} isFullWidth={true}>Open in Terra Finder</Button>
-                  </Link>
-                </Box>
-              )}
-              {txError && <Text>{txError}</Text>}
-            </ModalBody>
-            <ModalFooter>
-              {!txResult && !txError && (
-                <Button disabled={!isInputValid()} colorScheme='blue' isFullWidth={true} onClick={sendTokens}>
-                  Submit
-                </Button>
-              )}
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      )}
+      <Modal isOpen={isOpen} onClose={onCloseModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Send {props.coin.denom}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            { // Show form if no transaction has been submitted
+              !txResult && !txError && (
+              <Box display={"flex"} flexDir={"column"} gap={5}>
+                <FormControl>
+                  <FormLabel>Recipient</FormLabel>
+                  <Input
+                    placeholder='terra12y5m2n9f7e2nmwz5fxtfvujv2ru23trr6pnk6f'
+                    type="text" value={recipient}
+                    onChange={(e) => {setRecipient(e.target.value)}}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Amount</FormLabel>
+                  <Input
+                    placeholder='100'
+                    type="number" value={amount}
+                    onChange={(e) => {setAmount(e.target.value)}}
+                  />
+                </FormControl>
+              </Box>
+            )}
+            { // Show Success if the transaction was successful
+              txResult && (
+              <Box display={"flex"} flexDir={"column"} gap={5}>
+                <Heading>Success</Heading>
+                <Link
+                  href={`https://finder.terra.money/${connectedWallet.network.chainID}/tx/${txResult.result.txhash}`}
+                  target="_blank"
+                >                
+                  <Button colorScheme={"green"} isFullWidth={true}>Open in Terra Finder</Button>
+                </Link>
+              </Box>
+            )}
+            { // Show Error if the transaction failed
+              txError && (
+              <Box display={"flex"} flexDir={"column"} gap={1}>
+                <Text fontWeight={"bold"} color="red.500">Error</Text>
+                <Text>{txError}</Text>
+              </Box>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            { // Show submit button if no transaction has been submitted
+              !txResult && !txError && (
+              <Button disabled={!isInputValid()} colorScheme='blue' isFullWidth={true} onClick={sendTokens}>
+                Submit
+              </Button>
+            )}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
     
   );

@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react';
 import { ConnectType, useWallet, WalletStatus } from '@terra-money/wallet-provider';
 import React from 'react';
 
-export function Connect() {
+export function ConnectWallet() {
   const {
     status,
     network,
