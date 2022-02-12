@@ -24,16 +24,13 @@ export function TokenDescription(props : TokenDescriptionProps) {
   const [txResult, setTxResult] = useState<TxResult | null>(null);
   const [txError, setTxError] = useState<string | null>(null);
 
-  let amount = parseFloat(props.coin.amount) / 1000000
-  amount = Math.round(amount * 100) / 100
-
   return (
     <div>
       <Flex direction={"row"}>
         <Text flex={1}>{props.coin.denom}</Text>
         <Link onClick={() => {props.onPressSend()}} >&#x21AA;Send</Link>
       </Flex>
-      <Text opacity={.6}>{amount}</Text>
+      <Text opacity={.6}>{props.coin.getBalance()}</Text>
     </div>
   );
 }

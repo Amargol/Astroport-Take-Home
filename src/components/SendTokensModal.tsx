@@ -41,7 +41,11 @@ export function SendTokensModal(props : SendTokensModalProps) {
   }
 
   const isInputValid = () : boolean => {
-    return !!recipient && !!amount
+    return !!recipient && !!amount && isAmountWithinRange()
+  }
+
+  const isAmountWithinRange = () : boolean => {
+    return props.coin.amount.greaterThanOrEqualTo(Math.floor(parseFloat(amount) * 1000000))
   }
 
   const sendTokens = () => {
@@ -106,10 +110,12 @@ export function SendTokensModal(props : SendTokensModalProps) {
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Amount</FormLabel>
+                  <FormLabel>Amount <Box as='span' fontWeight={"normal"}>(Balance: {props.coin.getBalance()}</Box>)</FormLabel>
                   <Input
                     placeholder='100'
                     type="number" value={amount}
+                    isInvalid={amount != "" && !isAmountWithinRange()}
+                    errorBorderColor='red.300'
                     onChange={(e) => {setAmount(e.target.value)}}
                   />
                 </FormControl>

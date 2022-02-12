@@ -11,13 +11,17 @@ import './style.css';
 
 export class Coin {
   denom: string;
-  amount: string;
-  decimals: number;
+  amount: Numeric.Output;
 
-  constructor (denom : string, amount : string, decimals : number) {
+  getBalance () : string {
+    let amount = this.amount.dividedBy(1000000)
+    amount = amount.times(100).round().dividedBy(100)
+    return amount.toString()
+  }
+
+  constructor (denom : string, amount : Numeric.Output) {
     this.denom = denom
     this.amount = amount
-    this.decimals = decimals
   }
 }
 
@@ -39,7 +43,7 @@ function App() {
 
         coins.map((coin) => {console.log(coin.amount.toString())})
         
-        let balances = coins.map(coin => new Coin(coin.denom, coin.amount.toString(), 0))
+        let balances = coins.map(coin => new Coin(coin.denom, coin.amount))
         setCoins(balances)
       });
     } else {
