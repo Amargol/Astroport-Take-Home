@@ -15,6 +15,7 @@
 
 I could have easily solved these obstacles by hard coding the proper names and token images in the code, but I thought that would cause issues in the future if the name or logo of anything changes. I thought there should be a better solution using the API, but I did not have time to find it. 
 
+* Did not have time to create a proper UI to handle all types of wallets (such as walletconnect or xdefi wallet). Right now, the site only supports the TerraStation browser wallet. I', confident there are some open source components that handle connection to any kind of Terra wallet, but I did not have time to find and integrate that. 
 ## Improvements
 
 * Supporting additional tokens.
