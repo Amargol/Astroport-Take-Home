@@ -1,5 +1,15 @@
 # Astroport Take Home Assignment
 
+## Hosted Version
+https://upbeat-noether-5e8341.netlify.app/
+
+## Instructions
+ 1. Clone the repo
+ 2. CD into the repo
+ 3. Run `npm Install`
+ 4. Run `npm start`
+ 5. Navigate to http://localhost:3000/ in the browser
+
 ## Features
 * Front end built with Chakra UI & Typescript
 * Connect wallet via Terra Station
@@ -10,7 +20,7 @@
 
 ## Obstacles
 
-* The Terra.js bank API lists UST as "uusd" and LUNA as "uluna." I displayed the names the BankAPI returned rather than the correct ones
+* The Terra.js bank API lists UST as "uusd" and LUNA as "uluna," which symbolize one millionth of a UST or LUNA.
 * Could not retrieve and display token images from the API
 
 I could have easily solved these obstacles by hard coding the proper names and token images in the code, but I thought that would cause issues in the future if the name or logo of anything changes. I thought there should be a better solution using the API, but I did not have time to find it. 
