@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Spinner } from '@chakra-ui/react';
 import { ConnectType, useWallet, WalletStatus } from '@terra-money/wallet-provider';
 import React from 'react';
 
@@ -21,6 +21,10 @@ export function ConnectWallet() {
       
       {status === WalletStatus.WALLET_NOT_CONNECTED && (
         <Button isFullWidth={true} backgroundColor="#5543F2" colorScheme="blue" onClick={() => {connect(ConnectType.EXTENSION)}}>Connect Wallet</Button>
+      )}
+
+      {status === WalletStatus.INITIALIZING && (
+        <Button isFullWidth={true} backgroundColor="#5543F2" colorScheme="blue"><Spinner /></Button>
       )}
 
       {status === WalletStatus.WALLET_CONNECTED && (
