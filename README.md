@@ -1,5 +1,7 @@
 # Astroport Take Home Assignment
 
+![](recording.gif)
+
 ## Hosted Version
 https://upbeat-noether-5e8341.netlify.app/
 
